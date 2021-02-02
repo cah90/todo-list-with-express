@@ -5,8 +5,7 @@
   "main": "start.js",
   "dependencies": {
     "express": "^4.17.1",
-    "method-override": "^3.0.0",
-    "prompt-sync": "^4.2.0"
+    "method-override": "^3.0.0"
   },
   "devDependencies": {},
   "scripts": {
