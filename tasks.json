@@ -2,23 +2,16 @@
   "allTasks": [
     {
       "id": 1,
-      "title": "My task number 1",
+      "title": "test",
       "description": "test",
-      "deadline": "20.02.2021",
+      "deadline": "test",
       "completed": "no"
     },
     {
       "id": 2,
-      "title": "My task number 2",
-      "description": "test",
-      "deadline": "20.02.2021",
-      "completed": "no"
-    },
-    {
-      "id": 3,
-      "title": "My task number 3",
-      "description": "test",
-      "deadline": "20.02.2021",
+      "title": "bake a cake",
+      "description": "bake a chocolate cake",
+      "deadline": "04/02/2022",
       "completed": "no"
     }
   ]

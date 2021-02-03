@@ -15,9 +15,13 @@ npm install
 Run inside the terminal the following line of code.
 
 ```
-node server.js
+node app.js
 ```
+Or for a server that reloads automatically, run this line:
 
+```
+nodemon app.js
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
