@@ -1,24 +1,10 @@
 {
   "allTasks": [
     {
-      "id": 2,
-      "title": "bake a cake",
-      "description": "bake a chocolate cake",
-      "deadline": "04/02/2022",
-      "completed": "no"
-    },
-    {
-      "id": 3,
-      "title": "bake a cake",
-      "description": "bake a chocolate cake",
-      "deadline": "04/02/2022",
-      "completed": "no"
-    },
-    {
-      "id": 4,
-      "title": "chocolate",
-      "description": "choco",
-      "deadline": "choco",
+      "id": 1,
+      "title": "Bake a chocolate cake",
+      "description": "Lets buy the ingredients",
+      "deadline": "04/05/2021",
       "completed": "no"
     }
   ]

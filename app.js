@@ -19,10 +19,18 @@ app.get('/', (req, res) => {
 
 app.get('/tasks', (req, res) => {
 
-  let html = '<html><head><title>All Tasks</title></head><body><ul>'
+  let html = `
+    <a href="/tasks/create"><strong>Add a new task</strong></a>
+
+    <html><head><title>All Tasks</title></head><body><ul>
+    `
 
   for (task of tasks.allTasks) {
-    html += `<li>${task.title}</li>`
+    html += `
+      <li>${task.title}</li>
+      <a href="/tasks/edit/${task.id}">Edit</a> 
+      <a href="/tasks/delete/${task.id}">Delete</a> 
+    `
   }
 
   html += '</ul></body></html>'
@@ -57,7 +65,7 @@ app.get('/tasks/create', (req, res) => {
           <label>Is it completed?:</label>
           <input type="text" name="completed" />
 
-          <button type="submit">Salvar</button>
+          <button type="submit">Save</button>
         </form> 
       </body>
   </html>     
@@ -132,8 +140,16 @@ app.get('/tasks/edit/:id', (req, res) => {
                   <label>Is it completed?:</label>
                   <input type="text" name="completed" value="${task.completed}"/>
 
-                  <button type="submit">Editar</button>
+                  <br/>
+                  <br/>
+
+                  <button type="submit">Edit</button>
                 </form> 
+
+                <form action="/tasks/delete?_method=DELETE" method="post">
+                  <input type="hidden" name="id" value="${task.id}"/>
+                  <button type="submit">Delete</button>
+                </form>
               </body>
           </html>     
           `
@@ -164,32 +180,54 @@ app.put('/tasks', (req, res) => {
   res.redirect('/tasks')
 })
 
+app.delete('/tasks/delete', (req, res) => {
+  const id = req.body.id
+
+  for (let i = 0; i < tasks.allTasks.length; i++) {
+
+    if (tasks.allTasks[i].id == id) {
+      tasks.allTasks.splice(i, 1)
+    }
+  }
+
+  fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
+    if (err) {
+      console.log("Write file error.")
+    }
+  })
+
+  //res.send("Your task was deleted.")
+  res.redirect("/tasks")
+})
+
 app.get('/tasks/delete/:id', (req, res) => {
-      const id = req.params.id
+  const id = req.params.id
 
-      for (let i = 0; i < tasks.allTasks.length; i++) {
+  for (let i = 0; i < tasks.allTasks.length; i++) {
 
-        if (tasks.allTasks[i].id == id) {
-          tasks.allTasks.splice(i, 1)
-        }
-      }
+    if (tasks.allTasks[i].id == id) {
+      tasks.allTasks.splice(i, 1)
+    }
+  }
 
-      fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
-        if (err) {
-          console.log("Write file error.")
-        }
-      })
+  fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
+    if (err) {
+      console.log("Write file error.")
+    }
+  })
 
-      res.send("Your task was deleted.")
-    })
+  //res.send("Your task was deleted.")
+  res.redirect("/tasks")
 
-
-
-
+})
 
 
-      //* SERVER
 
-      app.listen(port, () => {
-        console.log(`Server is working at port ${port}`)
-      })
+
+
+
+//* SERVER
+
+app.listen(port, () => {
+  console.log(`Server is working at port ${port}`)
+})
