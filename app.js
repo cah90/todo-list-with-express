@@ -12,6 +12,14 @@ app.use(express.urlencoded({
 }))
 app.use(methodOverride('_method'))
 
+function writingOnJSONFile(filename, data) {
+  fs.writeFile(filename, JSON.stringify(data, null, 2), function(err) {
+    if (err) {
+      console.log("Write file error.")
+    }
+  })
+}
+
 
 app.get('/', (req, res) => {
   res.send("Hello World!")
@@ -92,12 +100,7 @@ app.post('/tasks', (req, res) => {
     ...data
   })
 
-
-  fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
-    if (err) {
-      console.log("Write file error.")
-    }
-  })
+  writingOnJSONFile("tasks.json", tasks)
 
   //res.send('Your task was recorded!')
   res.redirect('/tasks')
@@ -171,11 +174,7 @@ app.put('/tasks', (req, res) => {
     }
   }
 
-  fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
-    if (err) {
-      console.log("Write file error.")
-    }
-  })
+  writingOnJSONFile("tasks.json", tasks)
 
   res.redirect('/tasks')
 })
@@ -190,11 +189,7 @@ app.delete('/tasks/delete', (req, res) => {
     }
   }
 
-  fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
-    if (err) {
-      console.log("Write file error.")
-    }
-  })
+  writingOnJSONFile("tasks.json", tasks)
 
   //res.send("Your task was deleted.")
   res.redirect("/tasks")
@@ -210,11 +205,7 @@ app.get('/tasks/delete/:id', (req, res) => {
     }
   }
 
-  fs.writeFile("tasks.json", JSON.stringify(tasks, null, 2), function (err) {
-    if (err) {
-      console.log("Write file error.")
-    }
-  })
+  writingOnJSONFile("tasks.json", tasks)
 
   //res.send("Your task was deleted.")
   res.redirect("/tasks")

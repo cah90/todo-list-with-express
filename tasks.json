@@ -6,6 +6,13 @@
       "description": "Lets buy the ingredients",
       "deadline": "04/05/2021",
       "completed": "no"
+    },
+    {
+      "id": 2,
+      "title": "Organize my todo list",
+      "description": "organizing a todo list",
+      "deadline": "04/02/2021",
+      "completed": "no"
     }
   ]
 }
